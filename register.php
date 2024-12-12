@@ -16,34 +16,58 @@
        <div class="row justfiy-content-center">
                <div class="col-md-6">
                    <div class="card shadow">
-                    <div class="card body">
-                        <h2 class="text-center">Register</h2>
- 
-                     <form method="POST">
+                     <div class="card-body">
+                            <h2 class="text-center">Register</h2>
 
 
-                     <div class="md-3">
-                        <label for="name" class=" form-label">name</label>
-                        <input type="text" name="name" id="name" class="form-control">
-                    </div>
-
+                    <?php 
                     
-                    <div class="md-3">
-                        <label for="email" class=" form-label">email</label>
-                        <input type="text" name="email" id="email" class="form-control">
-                    </div>
+                    if($_SERVER['REQUESTED_METHOD'] == 'POST'){
+                        $name = $_POST ['name'];
+                        $email = $_POST ['email'];
+                        $password = password_hash($_POST['passoword'], password_bcrypt);
+                        $sql = "INSERT INTO users (name,email,passoword) VALUE (?,?,?)";
 
+
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bind_Param('sss', $name , $email,$password);
+
+                        if($stmt -> execute(){
+                            echo"<div>Request  sucsesfull <a href='login.php'>Login here</a></div>";
+                        }) else{
+                            echo "<div class='alret alret-danger'>error" .$stmt->erorr. "</div>"
+                        }
+                    }
                     
-                    <div class="md-3">
-                        <label for="password" class=" form-label">password</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                    </div>
 
-                    <button type="submit" class="btn btn-primary w-100" >Register</button>
 
-                     </form>
+                    ?>
+    
+                        <form method="POST">
 
-                    </div>
+
+                        <div class="md-3">
+                            <label for="name" class=" form-label">name</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+
+                        
+                        <div class="md-3">
+                            <label for="email" class=" form-label">email</label>
+                            <input type="text" name="email" id="email" class="form-control">
+                        </div>
+
+                        
+                        <div class="md-3">
+                            <label for="password" class=" form-label">password</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100" >Register</button>
+
+                        </form>
+
+                     </div>
                  </div>
               </div>
          </div>
