@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <form method="POST">
+    //
     <input type="text" name="title" placeholder="Title" required>
     <textarea name="description" placeholder="Description" required></textarea>
     <input type="text" name="genre" placeholder="Genre">
