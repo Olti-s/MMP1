@@ -45,8 +45,41 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !='user'){
             <th>Status</th>
         </tr>
     </thead>
+
+    <tbody>
+      <?php  
+    if($result ->num_row > 0){
+        while($row = $result->fetch_assoc()){
+            echo "<tr>
+             <td>{$row['id'] }</td>
+             <td>{$row['title'] }</td>
+             <td>{$row['show_date'] }</td>
+             <td>{$row['show_time'] }</td>
+             <td>{$row['status'] }</td>
+            
+            </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='5' class='text-center'>  No bookings found </tr></td>"
+
+    }
+
+
+
+
+
+      ?>  
+    </tbody>
+
+
     </table>
+
+
+  
 
 
 
 </div>
+<?php 
+ include '../include/footer.php';
+?>
